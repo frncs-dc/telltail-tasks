@@ -5,9 +5,10 @@ const HomeTerrain = () => {
     useEffect(() => {
 
          // Spawning Script
-         const draggableElements = document.querySelectorAll('[id^="test"]');
+         const draggableElements = document.querySelectorAll('[id^="pet"]');
          const container = document.getElementById("house");
          const containerOffsetTop = container.getBoundingClientRect().top;
+         const containerOffsetLeft = container.getBoundingClientRect().left;
          const containerWidth = parseFloat(getComputedStyle(container).width);
          const containerHeight = parseFloat(getComputedStyle(container).height);
          const minDistance = 100;
@@ -15,7 +16,7 @@ const HomeTerrain = () => {
          draggableElements.forEach(element => {
              let newLeft, newTop;
              do {
-                 newLeft = Math.random() * (containerWidth - element.clientWidth);
+                 newLeft = Math.random() * (containerWidth - element.clientWidth) + containerOffsetLeft;
                  newTop = Math.random() * (containerHeight - element.clientHeight) + containerOffsetTop;
              } while (isTooClose(newLeft, newTop));
  
@@ -92,12 +93,12 @@ const HomeTerrain = () => {
     }, []);
 
     return (  
-        <div id="house">
-            <img id="test1" src="TestPets/Test_Pet1.png" alt="Piplup!"/>
-            <img id="test2" src="TestPets/Test_Pet2.png" alt="Squirtle!"/>
-            <img id="test3" src="TestPets/Test_Pet3.png" alt="Mudkip!"/>
-            <img id="test4" src="TestPets/Test_Pet4.png" alt="Oshawott!"/>
-            <img id="test5" src="TestPets/Test_Pet5.png" alt="Froakie!"/>
+        <div id="house" className="container">
+            <div className="container pets" id="pet1"><img src="TestPets/Test_Pet1.png" alt="Piplup!"/></div>
+            <div className="container pets" id="pet2"><img src="TestPets/Test_Pet2.png" alt="Squirtle!"/></div>
+            <div className="container pets" id="pet3"><img src="TestPets/Test_Pet3.png" alt="Mudkip!"/></div>
+            <div className="container pets" id="pet4"><img src="TestPets/Test_Pet4.png" alt="Oshawott!"/></div>
+            <div className="container pets" id="pet5"><img src="TestPets/Test_Pet5.png" alt="Froakie!"/></div>
         </div>
     );
 }
