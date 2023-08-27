@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 
-const HomeTerrain = () => {
+const HomeTerrain = (props) => {
 
+    //onStart or onRefresh useEffect
     useEffect(() => {
 
          // Spawning Script
-         const draggableElements = document.querySelectorAll('[id^="pet"]');
+         const userPet = document.querySelectorAll('[id^="pet"]');
          const container = document.getElementById("house");
          const containerOffsetTop = container.getBoundingClientRect().top;
          const containerOffsetLeft = container.getBoundingClientRect().left;
@@ -13,7 +14,7 @@ const HomeTerrain = () => {
          const containerHeight = parseFloat(getComputedStyle(container).height);
          const minDistance = 100;
  
-         draggableElements.forEach(element => {
+         userPet.forEach(element => {
              let newLeft, newTop;
              do {
                  newLeft = Math.random() * (containerWidth - element.clientWidth) + containerOffsetLeft;
@@ -25,7 +26,7 @@ const HomeTerrain = () => {
          });
  
          function isTooClose(newLeft, newTop) {
-             for (const element of draggableElements) {
+             for (const element of userPet) {
                  const existingLeft = parseFloat(element.style.left);
                  const existingTop = parseFloat(element.style.top);
                  const horizontalDistance = Math.abs(newLeft - existingLeft);
@@ -37,12 +38,18 @@ const HomeTerrain = () => {
              }
              return false;
          }
+        
+    }, []);
 
-        //Drag Script
+    useEffect(() => {
+        const userPet = document.querySelectorAll('[id^="pet"]');
+        const dragElementListeners = [];
+    
+        // Drag Script
         const dragElement = (elmnt) => {
             let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-            elmnt.onmousedown = function (e) {
+    
+            function onMouseDown(e) {
                 e = e || window.event;
                 e.preventDefault();
                 // get the mouse cursor position at startup:
@@ -53,8 +60,8 @@ const HomeTerrain = () => {
                 document.onmousemove = function (e) {
                     elementDrag(e);
                 };
-            };
-
+            }
+    
             function elementDrag(e) {
                 e = e || window.event;
                 e.preventDefault();
@@ -63,7 +70,7 @@ const HomeTerrain = () => {
                 pos2 = pos4 - e.clientY;
                 pos3 = e.clientX;
                 pos4 = e.clientY;
-
+    
                 // Calculate the new element position within the container's boundaries
                 const container = document.getElementById("house");
                 const containerRect = container.getBoundingClientRect();
@@ -71,36 +78,65 @@ const HomeTerrain = () => {
                 const maxTop = containerRect.bottom - elmnt.clientHeight;
                 const minLeft = containerRect.left;
                 const maxLeft = containerRect.right - elmnt.clientWidth;
-
+    
                 const newTop = Math.min(Math.max(elmnt.offsetTop - pos2, minTop), maxTop);
                 const newLeft = Math.min(Math.max(elmnt.offsetLeft - pos1, minLeft), maxLeft);
-
+    
                 // set the element's new position:
                 elmnt.style.top = newTop + "px";
                 elmnt.style.left = newLeft + "px";
             }
-
+    
             function closeDragElement() {
                 // stop moving when mouse button is released:
                 document.onmouseup = null;
                 document.onmousemove = null;
             }
+    
+            elmnt.addEventListener("mousedown", onMouseDown);
+            dragElementListeners.push({ element: elmnt, listener: onMouseDown });
+    
         };
-
-        draggableElements.forEach(element => {
-            dragElement(element);
+    
+        userPet.forEach(element => {
+            if (props.command === "Information") {
+                console.log("Information");
+            }
+            else if (props.command === "Drag") {
+                dragElement(element);
+            }
+            else if (props.command === "Feed") {
+                console.log("Feed");
+            }
+            else if (props.command === "Inventory") {
+                console.log("Inventory");
+            }
+            else if (props.command === "Return") {
+                console.log("Return");
+            }
         });
-        
-    }, []);
+    
+        return () => {
+            dragElementListeners.forEach(({ element, listener }) => {
+                element.removeEventListener("mousedown", listener);
+            });
+        };
+    
+    }, [props.command]);
 
-    return (  
+
+    return ( 
+        <>
+        
         <div id="house" className="container">
+        <h1>Doing {props.command}</h1>
             <div className="container pets" id="pet1"><img src="TestPets/Test_Pet1.png" alt="Piplup!"/></div>
             <div className="container pets" id="pet2"><img src="TestPets/Test_Pet2.png" alt="Squirtle!"/></div>
             <div className="container pets" id="pet3"><img src="TestPets/Test_Pet3.png" alt="Mudkip!"/></div>
             <div className="container pets" id="pet4"><img src="TestPets/Test_Pet4.png" alt="Oshawott!"/></div>
             <div className="container pets" id="pet5"><img src="TestPets/Test_Pet5.png" alt="Froakie!"/></div>
         </div>
+        </>
     );
 }
  

@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <h1>Normal Terrain</h1>
       <div>Currently doing: {selectedCommand}</div>
-      <HomeTerrain />
+      <HomeTerrain command = {selectedCommand} />
       <UserControls onSelectCommand={handleSelectCommand} />
     </div>
   );
