@@ -90,6 +90,7 @@ const HomeTerrain = () => {
         draggableElements.forEach(element => {
             dragElement(element);
         });
+        
     }, []);
 
     return (  

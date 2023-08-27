@@ -20,10 +20,7 @@ div.pets{
   /* position: relative; */
 }
 
-#user_Controls{
-  display:flex;
-  flex-direction: row;
-}
+
 
 #user_Controls div{
   margin-top: 50px;

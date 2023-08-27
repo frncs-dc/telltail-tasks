@@ -1,12 +1,27 @@
-const UserControls= () => {
+import { useState } from "react";
+
+const UserControls = (props) => {
+
+    let userCommands = ["Information", "Drag", "Feed", "Inventory", "Return"];
+    const [selectedIndex, setSelectedIndex] = useState(-1);
+
     return (  
-        <div id="user_Controls">
-            <div>Cursor</div>
-            <div>Drag</div>
-            <div>Food</div>
-            <div>Inventory</div>
-            <div>Return to To-Do</div>
-        </div>
+        <ul className="list-group list-group-horizontal-md justify-content-around">
+            {userCommands.map((userCommand, index) => (
+                <li className={
+                    selectedIndex===index
+                        ? "list-group-item active"
+                        : "list-group-item"
+                } 
+                key={userCommand}
+                onClick={(e) => {
+                    setSelectedIndex(index);
+                    props.onSelectCommand(userCommand); }}
+                >
+                    {userCommand}
+                </li>   
+            ))}
+        </ul>
     );
 }
  
