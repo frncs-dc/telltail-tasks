@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import NavigationBar from './components/NavigationBar';
 import YourTasks from './components/YourTasks';
+import AboutUs from './routes/AboutUs';
+import Story from './routes/Story';
+import Login from './routes/Login';
 
 function App() {
   return (
@@ -11,9 +14,21 @@ function App() {
         <NavigationBar />
         <div className="pages">
           <Routes>
+            <Route
+              path="/"
+              element={<Login />}
+            />
             <Route 
-              path="/" 
+              path="/YourTasks" 
               element={<YourTasks />} 
+            />
+            <Route
+              path="/AboutUs"
+              element={<AboutUs />}
+            />
+            <Route
+              path="/Story"
+              element={<Story />}
             />
           </Routes>
         </div>
