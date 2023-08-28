@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ModalTest from './ModalTest.js';
+
 
 
 const UserControls = (props) => {
@@ -8,9 +8,8 @@ const UserControls = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(-1);
 
 
-    return (  
+    return (
         <>
-        <ModalTest />
         <ul className="list-group list-group-horizontal-md justify-content-around">
             {userCommands.map((userCommand, index) => (
                 <li className={

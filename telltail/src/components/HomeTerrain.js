@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PetInfo from './PetInfo';
+import ModalTest from './ModalTest.js';
 
 const HomeTerrain = (props) => {
     const [buttonPopup, setButtonPopup] = useState(false);
+
+    const handlePopupExit = () => {
+        setButtonPopup(false);
+      }
 
     //onStart or onRefresh useEffect
     useEffect(() => {
@@ -145,7 +150,8 @@ const HomeTerrain = (props) => {
 
     return ( 
         <>
-         <PetInfo trigger={buttonPopup} />
+         <ModalTest trigger={buttonPopup} onPopupExit={handlePopupExit}/>   
+         
 
         <div id="house" className="container">
         <h1>Doing {props.command}</h1>
