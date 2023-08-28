@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import HomeTerrain from './HomeTerrain';
-import UserControls from './UserControls';
+import HomeTerrain from './components/HomeTerrain';
+import UserControls from './components/UserControls';
 import {useState} from "react";
 
 

@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import PetInfo from './PetInfo';
 
 const HomeTerrain = (props) => {
+    const [buttonPopup, setButtonPopup] = useState(false);
 
     //onStart or onRefresh useEffect
     useEffect(() => {
@@ -43,10 +45,24 @@ const HomeTerrain = (props) => {
 
     useEffect(() => {
         const userPet = document.querySelectorAll('[id^="pet"]');
-        const dragElementListeners = [];
-    
+        const elementListeners = [];
+
+        //Info Script
+        const infoPet = (elmnt) => {
+            function onClick(e) {
+                e = e || window.event;
+                e.preventDefault();
+                console.log("it is clicking");
+                
+                setButtonPopup(true);
+            }
+
+            elmnt.addEventListener("click", onClick);
+            elementListeners.push({ element: elmnt, listener: onClick });
+        }
+
         // Drag Script
-        const dragElement = (elmnt) => {
+        const dragPet = (elmnt) => {
             let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     
             function onMouseDown(e) {
@@ -94,16 +110,17 @@ const HomeTerrain = (props) => {
             }
     
             elmnt.addEventListener("mousedown", onMouseDown);
-            dragElementListeners.push({ element: elmnt, listener: onMouseDown });
+            elementListeners.push({ element: elmnt, listener: onMouseDown });
     
         };
+
     
         userPet.forEach(element => {
             if (props.command === "Information") {
-                console.log("Information");
+                infoPet(element);
             }
             else if (props.command === "Drag") {
-                dragElement(element);
+                dragPet(element);
             }
             else if (props.command === "Feed") {
                 console.log("Feed");
@@ -117,8 +134,9 @@ const HomeTerrain = (props) => {
         });
     
         return () => {
-            dragElementListeners.forEach(({ element, listener }) => {
+            elementListeners.forEach(({ element, listener }) => {
                 element.removeEventListener("mousedown", listener);
+                element.removeEventListener("click", listener)
             });
         };
     
@@ -127,7 +145,8 @@ const HomeTerrain = (props) => {
 
     return ( 
         <>
-        
+         <PetInfo trigger={buttonPopup} />
+
         <div id="house" className="container">
         <h1>Doing {props.command}</h1>
             <div className="container pets" id="pet1"><img src="TestPets/Test_Pet1.png" alt="Piplup!"/></div>
