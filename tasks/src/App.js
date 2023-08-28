@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import NavigationBar from './components/NavigationBar';
 import YourTasks from './components/YourTasks';
-import AboutUs from './routes/AboutUs';
-import Story from './routes/Story';
-import Login from './routes/Login';
+import AboutUs from './pages/AboutUs';
+import Story from './pages/Story';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             />
             <Route 
               path="/YourTasks" 
-              element={<YourTasks />} 
+              element={<YourTasks />}
             />
             <Route
               path="/AboutUs"
