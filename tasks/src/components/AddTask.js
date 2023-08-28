@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { InputGroup } from 'react-bootstrap';
+import { InputGroup, Row, Col } from 'react-bootstrap';
 
 function AddTask() {
   const [show, setShow] = useState(false);
@@ -13,7 +13,7 @@ function AddTask() {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
+        Add Task
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
@@ -29,12 +29,32 @@ function AddTask() {
                         aria-label="Task Name"
                     />
                 </InputGroup>
-                <InputGroup>
-                    <InputGroup.Text id="basic-addon1">Deadline:</InputGroup.Text>
-                    <input type='text'></input>
-                    <input type="date"></input>
+
+                <InputGroup className='mb-3'>
+                    <InputGroup.Text id="basic-addon1">Type:</InputGroup.Text>
+                    <Form.Select aria-label="Default select example">                      
+                      <option value="2">Personal</option>
+                      <option value="1">Work</option>
+                      <option value="3">Errands</option>
+                    </Form.Select>
                 </InputGroup>
-                
+
+                <Row>
+                  <Col xs="auto">
+                    <InputGroup className='mb-3'>
+                      <InputGroup.Text id="basic-addon1">Date:</InputGroup.Text>
+                      <input type="date" className='border pe-2 ps-2'></input>
+                    </InputGroup>
+                  </Col>
+
+                  <Col >
+                    <InputGroup className='mb-3'>
+                      <InputGroup.Text id="basic-addon1">Time:</InputGroup.Text>
+                      <input type="time" className='border pe-2 ps-2'></input>
+                    </InputGroup>
+                  </Col>
+                </Row>
+
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

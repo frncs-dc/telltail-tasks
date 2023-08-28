@@ -1,7 +1,7 @@
 function AboutUs(){
     return (
         <>
-            <div>This is the ABOUT IS.</div>   
+            <div>Credits:</div>
         </>
     )
 }

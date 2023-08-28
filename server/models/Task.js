@@ -13,6 +13,11 @@ const Task = new Schema({
     type:{
         type: String,
         enum: ['Work', 'Personal', 'Errands']
+    },
+    status:{
+        type: String,
+        enum: ['In Progress', 'Done'],
+        default: 'In Progress'
     }
 })
 

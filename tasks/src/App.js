@@ -6,6 +6,7 @@ import YourTasks from './components/YourTasks';
 import AboutUs from './pages/AboutUs';
 import Story from './pages/Story';
 import Login from './pages/Login';
+import Home from './pages/Home'
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
               element={<Login />}
             />
             <Route 
-              path="/YourTasks" 
-              element={<YourTasks />}
+              path="/Home" 
+              element={<Home />}
             />
             <Route
               path="/AboutUs"
