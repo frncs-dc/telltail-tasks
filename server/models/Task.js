@@ -2,11 +2,19 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const Task = new Schema({
+    user:{
+        type: String,
+        required: true
+    },
     title:{
         type: String,
         required: true
     },
     deadline:{
+        type: Date,
+        required: true
+    },
+    duetime:{
         type: Date,
         required: true
     },

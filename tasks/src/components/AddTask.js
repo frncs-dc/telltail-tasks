@@ -43,14 +43,14 @@ function AddTask() {
                   <Col xs="auto">
                     <InputGroup className='mb-3'>
                       <InputGroup.Text id="basic-addon1">Date:</InputGroup.Text>
-                      <input type="date" className='border pe-2 ps-2'></input>
+                      <input type="date" className='border pe-3 ps-2'></input>
                     </InputGroup>
                   </Col>
 
                   <Col >
                     <InputGroup className='mb-3'>
-                      <InputGroup.Text id="basic-addon1">Time:</InputGroup.Text>
-                      <input type="time" className='border pe-2 ps-2'></input>
+                      <InputGroup.Text id="basic-addon1" className='ms-auto'>Time:</InputGroup.Text>
+                      <input type="time" className='border pe-3 ps-2'></input>
                     </InputGroup>
                   </Col>
                 </Row>

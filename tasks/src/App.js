@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import NavigationBar from './components/NavigationBar';
-import YourTasks from './components/YourTasks';
 import AboutUs from './pages/AboutUs';
 import Story from './pages/Story';
 import Login from './pages/Login';
