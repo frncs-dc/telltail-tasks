@@ -6,6 +6,7 @@ function PetInfoModal(props) {
   const [show, setShow] = useState(false);
   const [displayInfo, setDisplayInfo] = useState(null);
 
+  //HANDLES THE CLOSE EVENT
   const handleClose = () => {
     setShow(false);
     props.onPopupExit()
@@ -13,6 +14,7 @@ function PetInfoModal(props) {
 
   const handleShow = () => setShow(true);
 
+  //HANDLES THE EVENT WHERE MODAL IS TRIGGERED AND DATA IS PASSED TO MODAL
   useEffect(() => {
     if (props.trigger === true) {
       handleShow();
