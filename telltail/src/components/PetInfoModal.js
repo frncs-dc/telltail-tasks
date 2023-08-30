@@ -2,27 +2,34 @@ import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function ModalTest(props) {
+function PetInfoModal(props) {
   const [show, setShow] = useState(false);
+  const [displayInfo, setDisplayInfo] = useState(null);
 
   const handleClose = () => {
     setShow(false);
-    props.onPopupExit()};
+    props.onPopupExit()
+  };
+
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (props.trigger === true) {
       handleShow();
+      setDisplayInfo(props.petInfo)
     }
 
-  }, [props.trigger]);
+  }, [props.trigger, props.petInfo]);
 
-  return (
+  return (displayInfo) ? (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>{displayInfo.name}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+      <Modal.Body> 
+        <img src={displayInfo.image} alt={`${displayInfo.name}!`}/>
+        Species: {displayInfo.species}
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
@@ -32,9 +39,9 @@ function ModalTest(props) {
         </Button>
       </Modal.Footer>
     </Modal>
-    );
+    ) : ""
 
 }
 
 
-export default ModalTest;
+export default PetInfoModal;

@@ -1,15 +1,47 @@
 import React, { useState, useEffect } from "react";
-import PetInfo from './PetInfo';
-import ModalTest from './ModalTest.js';
+import PetInfoModal from './PetInfoModal.js';
 
 const HomeTerrain = (props) => {
+    //Test Data
+    const pets = [
+        { 
+            name: "Piplup",
+            species: "penguin",
+            image: "TestPets/Test_Pet1.png"
+        },
+        {
+            name: "Mudkip", 
+            species: "mudskip",
+            image: "TestPets/Test_Pet3.png"
+        },
+        { 
+            name: "Squirtle", 
+            species: "turtle",
+            image: "TestPets/Test_Pet2.png"
+        },
+        { 
+            name: "Froakie", 
+            species: "frog",
+            image: "TestPets/Test_Pet5.png"
+        },
+        { 
+            name: "Oshawott", 
+            species: "seal",
+            image: "TestPets/Test_Pet4.png"
+        }
+      ];
+    
+    //Info Modal Popup State Manager
     const [buttonPopup, setButtonPopup] = useState(false);
 
     const handlePopupExit = () => {
         setButtonPopup(false);
       }
 
-    //onStart or onRefresh useEffect
+    //Select InfoPet onclick
+    const [selectedInfoPet, setSelectedInfoPet] = useState(null)
+
+    //onStart useEffect
     useEffect(() => {
 
          // Spawning Script
@@ -48,18 +80,18 @@ const HomeTerrain = (props) => {
         
     }, []);
 
+    //User Commands Scripts
     useEffect(() => {
         const userPet = document.querySelectorAll('[id^="pet"]');
         const elementListeners = [];
 
         //Info Script
-        const infoPet = (elmnt) => {
+        const infoPet = (elmnt, index) => {
             function onClick(e) {
                 e = e || window.event;
-                e.preventDefault();
-                console.log("it is clicking");
-                
+                e.preventDefault();              
                 setButtonPopup(true);
+                setSelectedInfoPet(index);
             }
 
             elmnt.addEventListener("click", onClick);
@@ -120,9 +152,9 @@ const HomeTerrain = (props) => {
         };
 
     
-        userPet.forEach(element => {
+        userPet.forEach((element, index) => {
             if (props.command === "Information") {
-                infoPet(element);
+                infoPet(element, index);
             }
             else if (props.command === "Drag") {
                 dragPet(element);
@@ -147,20 +179,21 @@ const HomeTerrain = (props) => {
     
     }, [props.command]);
 
-
+// need code to pass popup data how???
     return ( 
         <>
-         <ModalTest trigger={buttonPopup} onPopupExit={handlePopupExit}/>   
-         
-
+         <PetInfoModal trigger={buttonPopup} onPopupExit={handlePopupExit} petInfo={selectedInfoPet !== null ? pets[selectedInfoPet] : null}/>   
+        
         <div id="house" className="container">
         <h1>Doing {props.command}</h1>
-            <div className="container pets" id="pet1"><img src="TestPets/Test_Pet1.png" alt="Piplup!"/></div>
-            <div className="container pets" id="pet2"><img src="TestPets/Test_Pet2.png" alt="Squirtle!"/></div>
-            <div className="container pets" id="pet3"><img src="TestPets/Test_Pet3.png" alt="Mudkip!"/></div>
-            <div className="container pets" id="pet4"><img src="TestPets/Test_Pet4.png" alt="Oshawott!"/></div>
-            <div className="container pets" id="pet5"><img src="TestPets/Test_Pet5.png" alt="Froakie!"/></div>
+            
+        {pets.map((pet, index) => (
+            <div className="container pets" id={`pet${index + 1}`} key={index}>
+                <img src={pet.image} alt={`${pet.name}!`} />
+            </div>
+        ))}
         </div>
+        
         </>
     );
 }
