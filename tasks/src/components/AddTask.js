@@ -5,10 +5,48 @@ import Form from 'react-bootstrap/Form';
 import { InputGroup, Row, Col } from 'react-bootstrap';
 
 function AddTask() {
+
+  // [the variable to affect, the function that changes it]
+  const [title, setTitle] = useState('')
+  const [deadline, setDeadline] = useState('')
+  const [duetime, setDuetime] = useState('')
+  const [type, setType] = useState('')
+  const [error, setError] = useState(null)
+  
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleAddTask = async (e) => {
+    e.preventDefault()
+
+    const task = {title, deadline, duetime, type}
+
+    const response = await fetch ('/api/tasks', {
+      method: 'POST',
+      body: JSON.stringify(task),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    const json = await response.json()
+
+    if(!response.ok){
+      setError(json.error)
+    }
+
+    if(response.ok) {
+      setError(null)
+      setTitle('')
+      setDeadline('')
+      setDuetime('')
+      setType('')
+      handleClose()
+      console.log('new task added:', json)
+    }
+  }
+  
 
   return (
     <>
@@ -20,19 +58,20 @@ function AddTask() {
         <Modal.Header closeButton>
           <Modal.Title>Add Task</Modal.Title>
         </Modal.Header>
-        <Form>
+        <Form onSubmit={handleAddTask}>
             <Modal.Body>
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">Task Name:</InputGroup.Text>
                     <Form.Control
                         placeholder="Walk my dog"
                         aria-label="Task Name"
+                        onChange={(e) => setTitle(e.target.value)}
                     />
                 </InputGroup>
 
                 <InputGroup className='mb-3'>
                     <InputGroup.Text id="basic-addon1">Type:</InputGroup.Text>
-                    <Form.Select aria-label="Default select example">                      
+                    <Form.Select aria-label="Default select example" onChange={(e) => setType(e.target.value)}>                      
                       <option value="2">Personal</option>
                       <option value="1">Work</option>
                       <option value="3">Errands</option>
@@ -43,14 +82,14 @@ function AddTask() {
                   <Col xs="auto">
                     <InputGroup className='mb-3'>
                       <InputGroup.Text id="basic-addon1">Date:</InputGroup.Text>
-                      <input type="date" className='border pe-3 ps-2'></input>
+                      <input type="date" className='border pe-3 ps-2' onChange={(e) => setDeadline(e.target.value)}></input>
                     </InputGroup>
                   </Col>
 
                   <Col >
                     <InputGroup className='mb-3'>
                       <InputGroup.Text id="basic-addon1" className='ms-auto'>Time:</InputGroup.Text>
-                      <input type="time" className='border pe-3 ps-2'></input>
+                      <input type="time" className='border pe-3 ps-2' onChange={(e) => setDuetime(e.target.value)}></input>
                     </InputGroup>
                   </Col>
                 </Row>
@@ -60,7 +99,9 @@ function AddTask() {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <input class="btn btn-primary" type="submit" value="Add Task" formMethod='POST' onClick={handleClose}></input>
+                <Button variant="primary" onClick={handleAddTask}>
+                  Add Task
+                </Button>
             </Modal.Footer>
         </Form>
       </Modal>
