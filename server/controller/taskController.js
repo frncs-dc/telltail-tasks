@@ -1,6 +1,11 @@
 const Task = require('../models/TaskModel')
 const mongoose = require('mongoose')
 
+// testing the server
+const test = async(req, res) => {
+    res.json('Server is working!')
+}
+
 // get all tasks
 const getTasks = async (req, res) => {
     const tasks = await Task.find()
@@ -26,5 +31,6 @@ const newTask = async (req, res) => {
 
 module.exports = {
     getTasks,
-    newTask
+    newTask,
+    test
 }

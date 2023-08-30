@@ -20,9 +20,12 @@ function AddTask() {
   const handleAddTask = async (e) => {
     e.preventDefault()
 
-    const task = {title, deadline, duetime, type}
+    const formattedDeadline = new Date(deadline + 'T00:00:00');
+    const formattedDuetime = new Date('1970-01-01T' + duetime);
 
-    const response = await fetch ('/api/tasks', {
+    const task = {title, deadline: formattedDeadline, duetime: formattedDuetime, type: 'Work'}
+
+    const response = await fetch ('/api/tasks/Home', {
       method: 'POST',
       body: JSON.stringify(task),
       headers: {
@@ -34,6 +37,7 @@ function AddTask() {
 
     if(!response.ok){
       setError(json.error)
+      console.log('yay at least andito ka na finally')
     }
 
     if(response.ok) {
