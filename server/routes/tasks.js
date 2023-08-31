@@ -3,7 +3,8 @@ const express = require('express')
 const {
     getTasks,
     newTask,
-    completeTask
+    completeTask,
+    deleteTask
 } = require ('../controller/taskController.js')
 
 const router = express.Router()
@@ -13,5 +14,7 @@ router.get('/Home', getTasks)
 router.post('/Home', newTask)
 
 router.patch('/Home/:id', completeTask)
+
+router.delete('/Home/:taskID', deleteTask)
 
 module.exports = router

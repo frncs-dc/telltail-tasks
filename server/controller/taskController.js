@@ -37,11 +37,28 @@ const completeTask = async (req, res) => {
     res.status(200).json(task)
 }
 // delete task
+const deleteTask = async (req, res) => {
+    const { taskID } = req.params
 
+    if(!mongoose.Types.ObjectId.isValid(taskID)){
+        console.log('Not valid id')
+        return res.status(400).json({error: 'No such task'})
+    }
+
+    const task = await Task.findOneAndDelete({_id: taskID})
+
+    if (!task) {
+        console.log('Auq nga')
+        return res.status(400).json({error: 'No such task'})
+    }
+
+    res.status(200).json(task)
+}
 // task overdue
 
 module.exports = {
     getTasks,
     newTask,
-    completeTask
+    completeTask,
+    deleteTask
 }
