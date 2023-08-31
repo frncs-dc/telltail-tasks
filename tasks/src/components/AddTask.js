@@ -26,7 +26,7 @@ function AddTask() {
     const formattedDeadline = new Date(deadline + 'T00:00:00');
     const formattedDuetime = new Date('1970-01-01T' + duetime);
 
-    const task = {title, deadline: formattedDeadline, duetime: formattedDuetime, type: 'Work'}
+    const task = {title, deadline: formattedDeadline, duetime: formattedDuetime, type}
 
     const response = await fetch ('/api/tasks/Home', {
       method: 'POST',
@@ -79,10 +79,11 @@ function AddTask() {
 
                 <InputGroup className='mb-3'>
                     <InputGroup.Text id="basic-addon1">Type:</InputGroup.Text>
-                    <Form.Select aria-label="Default select example" onChange={(e) => setType(e.target.value)}>                      
-                      <option value="2">Personal</option>
-                      <option value="1">Work</option>
-                      <option value="3">Errands</option>
+                    <Form.Select aria-label="Default select example" onChange={(e) => setType(e.target.value)}>
+                      <option value="Default">Select a type</option>                      
+                      <option value="Personal">Personal</option>
+                      <option value="Work">Work</option>
+                      <option value="Errands">Errands</option>
                     </Form.Select>
                 </InputGroup>
 
