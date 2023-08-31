@@ -2,10 +2,11 @@ import Card from 'react-bootstrap/Card';
 import AddTask from './AddTask';
 import { useEffect, useState } from 'react';
 import IndivTask from './IndivTask';
+import { useTasksContext } from '../hooks/useTaskContext';
 
 function YourTasks(){
 
-    const [tasks, setTasks] = useState(null)
+    const {tasks, dispatch} = useTasksContext()
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -13,12 +14,12 @@ function YourTasks(){
             const json = await response.json() // parses the json
 
             if(response.ok){
-                setTasks(json)
+                dispatch({ type: 'SET_TASKS', payload: json})
             }
         }
 
         fetchTasks()
-    }, [])
+    }, [dispatch])
 
     return (
         <>

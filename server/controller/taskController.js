@@ -1,11 +1,6 @@
 const Task = require('../models/TaskModel')
 const mongoose = require('mongoose')
 
-// testing the server
-const test = async(req, res) => {
-    res.json('Server is working!')
-}
-
 // get all tasks
 const getTasks = async (req, res) => {
     const tasks = await Task.find()
@@ -24,7 +19,23 @@ const newTask = async (req, res) => {
     }
 }
 // complete task
+const completeTask = async (req, res) => {
+    const { taskID } = req.params
 
+    if(!mongoose.Types.ObjectId.isValid(taskID)){
+        return res.status(400).json({error: 'No such task'})
+    }
+
+    const task = await Task.findOneAndUpdate({_id: taskID}, {
+    ...req.body
+    })
+
+    if (!task) {
+    return res.status(400).json({error: 'No such task'})
+    }
+
+    res.status(200).json(task)
+}
 // delete task
 
 // task overdue
@@ -32,5 +43,5 @@ const newTask = async (req, res) => {
 module.exports = {
     getTasks,
     newTask,
-    test
+    completeTask
 }

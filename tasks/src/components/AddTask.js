@@ -3,9 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { InputGroup, Row, Col } from 'react-bootstrap';
+import { useTasksContext } from '../hooks/useTaskContext';
 
 function AddTask() {
 
+  const { dispatch } = useTasksContext()
   // [the variable to affect, the function that changes it]
   const [title, setTitle] = useState('')
   const [deadline, setDeadline] = useState('')
@@ -17,6 +19,7 @@ function AddTask() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const handleAddTask = async (e) => {
     e.preventDefault()
 
@@ -48,6 +51,7 @@ function AddTask() {
       setType('')
       handleClose()
       console.log('new task added:', json)
+      dispatch({type: 'CREATE_TASK', payload: json })
     }
   }
   

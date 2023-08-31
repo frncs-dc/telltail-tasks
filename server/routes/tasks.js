@@ -3,15 +3,15 @@ const express = require('express')
 const {
     getTasks,
     newTask,
-    test
+    completeTask
 } = require ('../controller/taskController.js')
 
 const router = express.Router()
 
 router.get('/Home', getTasks)
 
-router.get('/', test)
-
 router.post('/Home', newTask)
+
+router.patch('/Home/:id', completeTask)
 
 module.exports = router
