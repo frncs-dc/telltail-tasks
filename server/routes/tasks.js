@@ -13,7 +13,7 @@ router.get('/Home', getTasks)
 
 router.post('/Home', newTask)
 
-router.patch('/Home/:id', completeTask)
+router.put('/Home/:taskID', completeTask)
 
 router.delete('/Home/:taskID', deleteTask)
 

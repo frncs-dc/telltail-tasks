@@ -26,9 +26,11 @@ const completeTask = async (req, res) => {
         return res.status(400).json({error: 'No such task'})
     }
 
-    const task = await Task.findOneAndUpdate({_id: taskID}, {
-    ...req.body
-    })
+    const task = await Task.findOneAndUpdate(
+        {_id: taskID},
+        {status: req.body.status},
+        {new: true}
+    )
 
     if (!task) {
     return res.status(400).json({error: 'No such task'})
