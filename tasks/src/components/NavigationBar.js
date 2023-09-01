@@ -19,6 +19,7 @@ function NavigationBar() {
             <Nav className="ms-auto">
               <NavDropdown title="Username" id="basic-nav-dropdown" href="/" align="end">
                   <NavDropdown.Item href="/">Log In</NavDropdown.Item>
+                  <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Pet View</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3">Task View</NavDropdown.Item>
                   <NavDropdown.Divider />
