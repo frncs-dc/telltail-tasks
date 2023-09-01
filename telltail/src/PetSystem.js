@@ -4,7 +4,7 @@ import UserControls from './components/UserControls';
 import {useState} from "react";
 
 
-function App() {
+function PetSystem() {
 
   const [selectedCommand, setSelectedCommand] = useState();
 
@@ -22,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default PetSystem;
