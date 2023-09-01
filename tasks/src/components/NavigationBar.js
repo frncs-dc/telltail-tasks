@@ -24,6 +24,7 @@ function NavigationBar() {
                   <NavDropdown.Item href="#action/3.3">Task View</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">Settings</NavDropdown.Item>
+                  <NavDropdown.Item href="/PetSystem">Pet System</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

@@ -7,6 +7,7 @@ import Story from './pages/Story';
 import Login from './pages/Login';
 import Home from './pages/Home'
 import Profile from './pages/Profile';
+import PetSystem from './pages/PetSystem';
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
             <Route
               path="/Story"
               element={<Story />}
+            />
+            <Route
+              path="/PetSystem"
+              element={<PetSystem />}
             />
           </Routes>
         </div>
