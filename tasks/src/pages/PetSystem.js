@@ -1,20 +1,19 @@
-import 'bootstrap/dist/css/bootstrap.css';
 import HomeTerrain from '../components/HomeTerrain';
 import UserControls from '../components/UserControls';
-//import 'tasks/public/index.css';
+//import '../../public/index.css';
 import {useState} from "react";
 
 
 function PetSystem() {
-
-  const [selectedCommand, setSelectedCommand] = useState();
+  
+  const [selectedCommand, setSelectedCommand] = useState(null);
 
   const handleSelectCommand = (userCommand) => {
     setSelectedCommand(userCommand);
   }
 
   return (
-    <div className="App">
+    <div>
       <h1>Normal Terrain</h1>
       <div>Currently doing: {selectedCommand}</div>
       <HomeTerrain command = {selectedCommand} />

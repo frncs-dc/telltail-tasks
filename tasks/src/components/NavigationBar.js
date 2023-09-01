@@ -15,6 +15,7 @@ function NavigationBar() {
               <Nav.Link href="/Home">Your Tasks</Nav.Link>
               <Nav.Link href="/Story">Story</Nav.Link>
               <Nav.Link href="/AboutUs">About</Nav.Link>
+              <Nav.Link href="/PetSystem"> Pet System</Nav.Link>
             </Nav>
             <Nav className="ms-auto">
               <NavDropdown title="Username" id="basic-nav-dropdown" href="/" align="end">
@@ -24,7 +25,6 @@ function NavigationBar() {
                   <NavDropdown.Item href="#action/3.3">Task View</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">Settings</NavDropdown.Item>
-                  <NavDropdown.Item href="/PetSystem">Pet System</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
