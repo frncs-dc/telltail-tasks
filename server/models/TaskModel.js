@@ -14,10 +14,6 @@ const taskSchema = new Schema({
         type: Date,
         required: true
     },
-    duetime:{
-        type: Date,
-        required: true
-    },
     type:{
         type: String,
         enum: ['Work', 'Personal', 'Errands']

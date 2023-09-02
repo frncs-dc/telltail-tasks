@@ -4,14 +4,15 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { InputGroup, Row, Col } from 'react-bootstrap';
 import { useTasksContext } from '../hooks/useTaskContext';
+import { toDate } from '../helpers/Date';
 
 function AddTask() {
 
   const { dispatch } = useTasksContext()
   // [the variable to affect, the function that changes it]
   const [title, setTitle] = useState('')
-  const [deadline, setDeadline] = useState('')
-  const [duetime, setDuetime] = useState('')
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
   const [type, setType] = useState('')
   const [error, setError] = useState(null)
   
@@ -23,11 +24,11 @@ function AddTask() {
   const handleAddTask = async (e) => {
     e.preventDefault()
 
-    const formattedDeadline = new Date(deadline + 'T00:00:00');
-    const formattedDuetime = new Date('1970-01-01T' + duetime);
+    const deadline = date + "T" + time
+    const finalDate = toDate(deadline)
 
-    const task = {title, deadline: formattedDeadline, duetime: formattedDuetime, type}
-
+    const task = {title, deadline: finalDate.date, type}
+    
     const response = await fetch ('/api/tasks/Home', {
       method: 'POST',
       body: JSON.stringify(task),
@@ -46,11 +47,12 @@ function AddTask() {
     if(response.ok) {
       setError(null)
       setTitle('')
-      setDeadline('')
-      setDuetime('')
+      setDate('')
+      setTime('')
       setType('')
       handleClose()
       console.log('new task added:', json)
+      console.log("when added date:" +task.deadline)
       dispatch({type: 'CREATE_TASK', payload: json })
     }
   }
@@ -91,14 +93,14 @@ function AddTask() {
                   <Col xs="auto">
                     <InputGroup className='mb-3'>
                       <InputGroup.Text id="basic-addon1">Date:</InputGroup.Text>
-                      <input type="date" className='border pe-3 ps-2' onChange={(e) => setDeadline(e.target.value)}></input>
+                      <input type="date" className='border pe-3 ps-2' onChange={(e) => setDate(e.target.value)}></input>
                     </InputGroup>
                   </Col>
 
                   <Col >
                     <InputGroup className='mb-3'>
                       <InputGroup.Text id="basic-addon1" className='ms-auto'>Time:</InputGroup.Text>
-                      <input type="time" className='border pe-3 ps-2' onChange={(e) => setDuetime(e.target.value)}></input>
+                      <input type="time" className='border pe-3 ps-2' onChange={(e) => setTime(e.target.value)}></input>
                     </InputGroup>
                   </Col>
                 </Row>
