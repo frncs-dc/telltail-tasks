@@ -47,11 +47,11 @@ function DeletePrompt({task}){
                 <small>If you want to change the details of your task, you may simply edit them.</small>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    No, I change my mind.
-                </Button>
-                <Button className='--bs-danger' onClick={deleteTask}>
+                <Button variant='danger' onClick={deleteTask}>
                     Yes, I'm sure.
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                    No, I change my mind.
                 </Button>
                 </Modal.Footer>
             </Modal>
