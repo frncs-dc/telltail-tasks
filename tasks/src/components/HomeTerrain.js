@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PetInfoModal from './PetInfoModal.js';
 
-const HomeTerrain = (props) => {
+const HomeTerrain = () => {
     //Test Data
     const pets = [
         { 
@@ -83,31 +83,29 @@ const HomeTerrain = (props) => {
     //User Commands Scripts
     useEffect(() => {
         const userPet = document.querySelectorAll('[id^="pet"]');
-        const elementListeners = [];
-
+        const isDrag = false;
         //Info Script
         const infoPet = (elmnt, index) => {
-            function onClick(e) {
+            function onDoubleClick(e) {
                 e = e || window.event;
                 e.preventDefault();              
                 setButtonPopup(true);
                 setSelectedInfoPet(index);
             }
 
-            elmnt.addEventListener("click", onClick);
-            elementListeners.push({ element: elmnt, listener: onClick });
+            elmnt.addEventListener("dblclick", onDoubleClick);
         }
 
         // Drag Script
         const dragPet = (elmnt) => {
-            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            let newX = 0, newY = 0, curX = 0, curY = 0;
     
             function onMouseDown(e) {
                 e = e || window.event;
                 e.preventDefault();
                 // get the mouse cursor position at startup:
-                pos3 = e.clientX;
-                pos4 = e.clientY;
+                curX = e.clientX;
+                curY = e.clientY;
                 document.onmouseup = closeDragElement;
                 // call a function whenever the cursor moves:
                 document.onmousemove = function (e) {
@@ -119,10 +117,10 @@ const HomeTerrain = (props) => {
                 e = e || window.event;
                 e.preventDefault();
                 // calculate the new cursor position:
-                pos1 = pos3 - e.clientX;
-                pos2 = pos4 - e.clientY;
-                pos3 = e.clientX;
-                pos4 = e.clientY;
+                newX = curX - e.clientX;
+                newY = curY - e.clientY;
+                curX = e.clientX;
+                curY = e.clientY;
     
                 // Calculate the new element position within the container's boundaries
                 const container = document.getElementById("house");
@@ -132,8 +130,8 @@ const HomeTerrain = (props) => {
                 const minLeft = containerRect.left;
                 const maxLeft = containerRect.right - elmnt.clientWidth;
     
-                const newTop = Math.min(Math.max(elmnt.offsetTop - pos2, minTop), maxTop);
-                const newLeft = Math.min(Math.max(elmnt.offsetLeft - pos1, minLeft), maxLeft);
+                const newTop = Math.min(Math.max(elmnt.offsetTop - newY, minTop), maxTop);
+                const newLeft = Math.min(Math.max(elmnt.offsetLeft - newX, minLeft), maxLeft);
     
                 // set the element's new position:
                 elmnt.style.top = newTop + "px";
@@ -147,37 +145,16 @@ const HomeTerrain = (props) => {
             }
     
             elmnt.addEventListener("mousedown", onMouseDown);
-            elementListeners.push({ element: elmnt, listener: onMouseDown });
     
         };
 
-    
+        //Set effects for each
         userPet.forEach((element, index) => {
-            if (props.command === "Information") {
                 infoPet(element, index);
-            }
-            else if (props.command === "Drag") {
                 dragPet(element);
-            }
-            else if (props.command === "Feed") {
-                console.log("Feed");
-            }
-            else if (props.command === "Inventory") {
-                console.log("Inventory");
-            }
-            else if (props.command === "Return") {
-                console.log("Return");
-            }
         });
     
-        return () => {
-            elementListeners.forEach(({ element, listener }) => {
-                element.removeEventListener("mousedown", listener);
-                element.removeEventListener("click", listener)
-            });
-        };
-    
-    }, [props.command]);
+    }, []);
 
 // need code to pass popup data how???
     return ( 
@@ -185,7 +162,6 @@ const HomeTerrain = (props) => {
          <PetInfoModal trigger={buttonPopup} onPopupExit={handlePopupExit} petInfo={selectedInfoPet !== null ? pets[selectedInfoPet] : null}/>   
         
         <div id="house" className="container">
-        <h1>Doing {props.command}</h1>
             
         {pets.map((pet, index) => (
             <div className="container pets" id={`pet${index + 1}`} key={index}>
