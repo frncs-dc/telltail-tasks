@@ -6,28 +6,43 @@ const HomeTerrain = () => {
     const pets = [
         { 
             name: "Piplup",
-            species: "penguin",
-            image: "TestPets/Test_Pet1.png"
+            task: "Workout",
+            dateAcquired: "11/11/11",
+            image: "TestPets/Test_Pet1.png",
+            affection: 10,
+            hunger: 20
         },
         {
             name: "Mudkip", 
-            species: "mudskip",
-            image: "TestPets/Test_Pet3.png"
+            task: "Workout",
+            dateAcquired: "11/11/11",
+            image: "TestPets/Test_Pet3.png",
+            affection: 10,
+            hunger: 20
         },
         { 
             name: "Squirtle", 
-            species: "turtle",
-            image: "TestPets/Test_Pet2.png"
+            task: "Workout",
+            dateAcquired: "11/11/11",
+            image: "TestPets/Test_Pet2.png",
+            affection: 10,
+            hunger: 20
         },
         { 
             name: "Froakie", 
-            species: "frog",
-            image: "TestPets/Test_Pet5.png"
+            task: "Workout",
+            dateAcquired: "11/11/11",
+            image: "TestPets/Test_Pet5.png",
+            affection: 10,
+            hunger: 20
         },
         { 
             name: "Oshawott", 
-            species: "seal",
-            image: "TestPets/Test_Pet4.png"
+            task: "Workout",
+            dateAcquired: "11/11/11",
+            image: "TestPets/Test_Pet4.png",
+            affection: 10,
+            hunger: 20
         }
       ];
     
@@ -56,8 +71,8 @@ const HomeTerrain = () => {
          userPet.forEach(element => {
              let newLeft, newTop;
              do {
-                 newLeft = Math.random() * (containerWidth - element.clientWidth) + containerOffsetLeft;
-                 newTop = Math.random() * (containerHeight - element.clientHeight) + containerOffsetTop;
+                 newLeft = Math.random() * (containerWidth - element.clientWidth - element.clientLeft * 2) + containerOffsetLeft;
+                 newTop = Math.random() * (containerHeight - element.clientHeight - element.clientTop * 2) + containerOffsetTop;
              } while (isTooClose(newLeft, newTop));
  
              element.style.left = newLeft + "px";
@@ -83,7 +98,6 @@ const HomeTerrain = () => {
     //User Commands Scripts
     useEffect(() => {
         const userPet = document.querySelectorAll('[id^="pet"]');
-        const isDrag = false;
         //Info Script
         const infoPet = (elmnt, index) => {
             function onDoubleClick(e) {

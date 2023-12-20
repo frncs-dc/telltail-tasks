@@ -1,3 +1,6 @@
+
+/*CSS FOR PET HOUSING*/
+
 /* Image of the pet*/
 img{
   object-fit:cover;
@@ -15,10 +18,64 @@ div.pets{
 }
 
 #house{
-  border: 5px solid black;
+  border-image: url(../public/frame-hd.png) 42 round;
+  border-width: 21px;
+  border-style: solid;
+  margin-top: 50px;
   height: 500px;
   width: 100%;
   /* position: relative; */
 }
 
 
+/*CSS FOR PET INFO MODAL*/
+#infoModalTop{
+  display: flex;
+  margin-bottom: 25px;
+}
+
+#infoModalTop img{
+  height: 200px;
+  width: 200px;
+  border: 2px solid black;
+  margin-right: 15px;
+}
+
+#infoModalTextContainer{
+  flex: display;
+  flex-direction: column;
+}
+
+.modalText{
+  font-size: 1.25em;
+  margin-bottom: 5px;
+}
+
+#infoModalBottom{
+  margin-bottom: 25px
+}
+
+#infoModalProgressBars{
+  display: flex;
+  flex-direction: column;
+}
+
+#infoModalProgressBars .modalText{
+  margin-bottom: 15px;
+}
+
+#infoModalShowcase{
+  display:flex;
+  align-items: center;
+  width: 100%;
+}
+
+#infoModalShowcase table{
+  height: 60px;
+  width: 100%;
+  text-align: center;
+}
+
+#infoModalShowcase td{
+  border: 1.5px solid gray;
+}
