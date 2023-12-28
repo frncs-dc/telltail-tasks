@@ -145,11 +145,9 @@ const HomeTerrain = () => {
                 const maxTop = containerRect.bottom - elmnt.clientHeight - elmnt.clientTop * 2;
                 const minLeft = containerRect.left;
                 const maxLeft = containerRect.right - elmnt.clientWidth - elmnt.clientLeft * 2;
-                console.log(elmnt);
                 const newTop = Math.min(Math.max(elmnt.offsetTop - newY, minTop), maxTop);
                 const newLeft = Math.min(Math.max(elmnt.offsetLeft - newX, minLeft), maxLeft);
-                
-                console.log(e.clientX);
+
                 // set the element's new position:
                 elmnt.style.top = newTop + "px";
                 elmnt.style.left = newLeft + "px";
