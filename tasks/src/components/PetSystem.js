@@ -1,5 +1,5 @@
-import HomeTerrain from '../components/HomeTerrain';
-import UserControls from '../components/UserControls';
+import HomeTerrain from './HomeTerrain';
+import UserControls from './UserControls';
 //import '../../public/index.css';
 import {useState} from "react";
 

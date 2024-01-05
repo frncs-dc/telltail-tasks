@@ -1,13 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import NavigationBar from './components/NavigationBar';
 import AboutUs from './pages/AboutUs';
 import Story from './pages/Story';
 import Login from './pages/Login';
 import Home from './pages/Home'
 import Profile from './pages/Profile';
-import PetSystem from './pages/PetSystem';
+import PetSystem from './components/PetSystem';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -39,6 +38,10 @@ function App() {
             <Route
               path="/PetSystem"
               element={<PetSystem />}
+            />
+            <Route 
+              path="/SignUp" 
+              element={<SignUp />}
             />
           </Routes>
         </div>

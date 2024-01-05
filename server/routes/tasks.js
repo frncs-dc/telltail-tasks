@@ -4,12 +4,15 @@ const {
     getTasks,
     newTask,
     completeTask,
-    deleteTask
+    deleteTask,
+    filterTasks
 } = require ('../controller/taskController.js')
 
 const router = express.Router()
 
 router.get('/Home', getTasks)
+
+router.get('/Home/:filterType/:filterStatus', filterTasks)
 
 router.post('/Home', newTask)
 

@@ -2,6 +2,7 @@ import YourTasks from "../components/YourTasks"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import PetSystem from "../components/PetSystem";
 
 function Home(){
 
@@ -10,11 +11,9 @@ function Home(){
             <Container fluid className='p-4 border'>
             <Row className="d-flex align-items-center justify-content-center">
                     <Col className='col-8'>
-                        {/* PET AREA HERE */}
+                        <PetSystem />
                     </Col>
-                    <Col>
-                        <YourTasks />
-                    </Col>
+                    <YourTasks />
                 </Row>
            </Container>
         </>

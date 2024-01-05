@@ -11,17 +11,20 @@ const taskSchema = new Schema({
         required: true
     },
     deadline:{
-        type: Date,
+        type: String,
         required: true
     },
     type:{
         type: String,
-        enum: ['Work', 'Personal', 'Errands']
+        enum: ['Work', 'Personal', 'Errands', 'Misc']
     },
     status:{
         type: String,
         enum: ['In Progress', 'Done'],
         default: 'In Progress'
+    },
+    notes:{
+        type: String
     }
 })
 

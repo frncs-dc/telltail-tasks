@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { InputGroup, Row, Col } from 'react-bootstrap';
 import { useTasksContext } from '../hooks/useTaskContext';
-import { toDate } from '../helpers/Date';
 
 function AddTask() {
 
@@ -14,6 +13,7 @@ function AddTask() {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [type, setType] = useState('')
+  const [notes, setNotes] = useState('')
   const [error, setError] = useState(null)
   
   const [show, setShow] = useState(false);
@@ -25,9 +25,8 @@ function AddTask() {
     e.preventDefault()
 
     const deadline = date + "T" + time
-    const finalDate = toDate(deadline)
 
-    const task = {title, deadline: finalDate.date, type}
+    const task = {title, deadline, type, notes}
     
     const response = await fetch ('/api/tasks/Home', {
       method: 'POST',
@@ -50,6 +49,7 @@ function AddTask() {
       setDate('')
       setTime('')
       setType('')
+      setNotes('')
       handleClose()
       console.log('new task added:', json)
       console.log("when added date:" +task.deadline)
@@ -60,7 +60,7 @@ function AddTask() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className='mt-2' variant="primary" onClick={handleShow}>
         Add Task
       </Button>
 
@@ -82,10 +82,12 @@ function AddTask() {
                 <InputGroup className='mb-3'>
                     <InputGroup.Text id="basic-addon1">Type:</InputGroup.Text>
                     <Form.Select aria-label="Default select example" onChange={(e) => setType(e.target.value)}>
-                      <option value="Default">Select a type</option>                      
+                      <option value="Misc">Select a Type</option>
                       <option value="Personal">Personal</option>
                       <option value="Work">Work</option>
                       <option value="Errands">Errands</option>
+                      <option value="Misc">Misc</option>
+
                     </Form.Select>
                 </InputGroup>
 
@@ -103,6 +105,17 @@ function AddTask() {
                       <input type="time" className='border pe-3 ps-2' onChange={(e) => setTime(e.target.value)}></input>
                     </InputGroup>
                   </Col>
+                </Row>
+
+                <Row>
+                  <InputGroup className="mb-3">
+                      <InputGroup.Text id="basic-addon1">Notes:</InputGroup.Text>
+                      <Form.Control
+                          placeholder="Walk my dog"
+                          aria-label="Notes"
+                          onChange={(e) => setNotes(e.target.value)}
+                      />
+                  </InputGroup>
                 </Row>
 
             </Modal.Body>

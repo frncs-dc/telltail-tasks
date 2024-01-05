@@ -74,7 +74,7 @@ function toWords ( date ) {
 
     let objDate = toDate(date)
     console.log(objDate)
-    objDate = toTimeZone(objDate)
+    // objDate = toTimeZone(objDate)
     console.log(objDate)
     const toReturn = "Due on " + (objDate.iMonth + 1) + "/" +
                                 objDate.day + "/" +
