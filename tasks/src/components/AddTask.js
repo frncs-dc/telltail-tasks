@@ -60,7 +60,7 @@ function AddTask() {
 
   return (
     <>
-      <Button className='mt-2' variant="primary" onClick={handleShow}>
+      <Button className='mt-2 secondary-bg text border border-0' variant="primary" onClick={handleShow}>
         Add Task
       </Button>
 

@@ -1,5 +1,5 @@
 body {
-  background-color: #E1D2BC;
+  background-color: #E1D2BC !important;
 }
 
 .background-bg {
@@ -11,15 +11,19 @@ body {
 }
 
 .accent-bg {
-  background-color: #85796B;
+  background-color: #85796B !important;
 }
 
 .secondary {
-  color: #FFEC9E
+  color: #FFEC9E !important;
 }
 
 .secondary-bg {
-  background-color: #FFEC9E
+  background-color: #FFEC9E !important;
+}
+
+.text {
+  color: #3E2A1F !important;
 }
 
 .inner-shadow {
