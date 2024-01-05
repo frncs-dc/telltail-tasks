@@ -4,9 +4,41 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 function Login(){
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const navigate = useNavigate();
+
+    function goToSignUp() {
+        navigate("/SignUp");
+    }
+
+    function goToHome() {
+        navigate("/Home");
+    }
+
+    const fetchUser = async (e) => {
+        e.preventDefault()
+        
+        const response = await fetch(`/api/${email}/${password}`)
+        const json = await response.json() // parses the json
+
+        if(response.ok){
+            console.log("User Logged In: ", json)
+            goToHome()
+        }
+
+        else{
+            console.log(json.error)
+        }
+
+    }
+
     return (
         <Container>
             <Row className='mt-5 pt-4'>
@@ -15,13 +47,14 @@ function Login(){
                 </Col>
                 <Col>
                     <Card className='p-3'>
-                        <h3>Login ka na kasi<br></br>
-                        <small className="text-muted">sama ka na samin</small>
+                        <h3>Welcome to TellTail Tasks<br></br>
+                        <small className="text-muted">Help pets achieve happiness by taking care of yourself</small>
                         </h3>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Control type="email" placeholder="Enter email" 
+                                            onChange={(e) => setEmail(e.target.value)}/>
                                 <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                                 </Form.Text>
@@ -29,16 +62,28 @@ function Login(){
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Control type="password" placeholder="Password" 
+                                            onChange={(e) => setPassword(e.target.value)}/>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                            {/* Remember Me: Cookies and Stuff */}
+                            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                                 <Form.Check type="checkbox" label="Check me out" />
-                            </Form.Group>
-                            <Button variant="primary" type="submit">
-                                Submit
+                            </Form.Group> */}
+                            <Button variant="primary" type="submit" className='w-100' onClick={fetchUser}>
+                                Log In
+                            </Button>
+                            <Row>
+                                <Col className='mt-4 mb-2 text-center'>
+                                    Don't have an account?
+                                </Col>
+                            </Row>
+                            <Button variant="primary" onClick={goToSignUp} className='w-100'>
+                                Sign Up
                             </Button>
                         </Form>
+                        
                     </Card>
+                    
                 </Col>
             </Row>
         </Container>
