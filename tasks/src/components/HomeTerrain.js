@@ -3,49 +3,69 @@ import PetInfoModal from './PetInfoModal.js';
 
 const HomeTerrain = () => {
     //Test Data
-    const pets = [
-        { 
-            name: "Piplup",
-            task: "Workout",
-            dateAcquired: "11/11/11",
-            image: "TestPets/Test_Pet1.png",
-            affection: 10,
-            hunger: 20
-        },
-        {
-            name: "Mudkip", 
-            task: "Workout",
-            dateAcquired: "11/11/11",
-            image: "TestPets/Test_Pet3.png",
-            affection: 10,
-            hunger: 20
-        },
-        { 
-            name: "Squirtle", 
-            task: "Workout",
-            dateAcquired: "11/11/11",
-            image: "TestPets/Test_Pet2.png",
-            affection: 10,
-            hunger: 20
-        },
-        { 
-            name: "Froakie", 
-            task: "Workout",
-            dateAcquired: "11/11/11",
-            image: "TestPets/Test_Pet5.png",
-            affection: 10,
-            hunger: 20
-        },
-        { 
-            name: "Oshawott", 
-            task: "Workout",
-            dateAcquired: "11/11/11",
-            image: "TestPets/Test_Pet4.png",
-            affection: 10,
-            hunger: 20
+    // const pets = [
+    //     { 
+    //         name: "Piplup",
+    //         task: "Workout",
+    //         dateAcquired: "11/11/11",
+    //         image: "TestPets/Test_Pet1.png",
+    //         affection: 10,
+    //         hunger: 20
+    //     },
+    //     {
+    //         name: "Mudkip", 
+    //         task: "Workout",
+    //         dateAcquired: "11/11/11",
+    //         image: "TestPets/Test_Pet3.png",
+    //         affection: 10,
+    //         hunger: 20
+    //     },
+    //     { 
+    //         name: "Squirtle", 
+    //         task: "Workout",
+    //         dateAcquired: "11/11/11",
+    //         image: "TestPets/Test_Pet2.png",
+    //         affection: 10,
+    //         hunger: 20
+    //     },
+    //     { 
+    //         name: "Froakie", 
+    //         task: "Workout",
+    //         dateAcquired: "11/11/11",
+    //         image: "TestPets/Test_Pet5.png",
+    //         affection: 10,
+    //         hunger: 20
+    //     },
+    //     { 
+    //         name: "Oshawott", 
+    //         task: "Workout",
+    //         dateAcquired: "11/11/11",
+    //         image: "TestPets/Test_Pet4.png",
+    //         affection: 10,
+    //         hunger: 20
+    //     }
+    //   ];
+
+    const [pets, setPets] = useState(null)
+    //Fetch Pets
+    useEffect(() => {
+        const fetchPets = async () => {
+            const response = await fetch('/api/pets/PetSystem')
+            const json = await response.json()
+
+            if (response.ok){
+                setPets(json)
+                
+            }
         }
-      ];
-    
+
+        fetchPets()
+
+    }, [])
+
+
+
+
     //Info Modal Popup State Manager
     const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -178,11 +198,12 @@ const HomeTerrain = () => {
         
         <div id="house" className="container">
             
-        {pets.map((pet, index) => (
+        {pets && pets.map((pet, index) => (
             <div className="container pets" id={`pet${index + 1}`} key={index}>
                 <img src={pet.image} alt={`${pet.name}!`} />
             </div>
         ))}
+
         </div>
         
         </>
