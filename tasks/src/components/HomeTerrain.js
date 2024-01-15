@@ -81,24 +81,26 @@ const HomeTerrain = () => {
     useEffect(() => {
 
          // Spawning Script
-         const userPet = document.querySelectorAll('[id^="pet"]');
-         const container = document.getElementById("house");
-         const containerOffsetTop = container.getBoundingClientRect().top;
-         const containerOffsetLeft = container.getBoundingClientRect().left;
-         const containerWidth = parseFloat(getComputedStyle(container).width);
-         const containerHeight = parseFloat(getComputedStyle(container).height);
-         const minDistance = 100;
- 
-         userPet.forEach(element => {
-             let newLeft, newTop;
-             do {
-                 newLeft = Math.random() * (containerWidth - element.clientWidth - element.clientLeft * 2) + containerOffsetLeft;
-                 newTop = Math.random() * (containerHeight - element.clientHeight - element.clientTop * 2) + containerOffsetTop;
-             } while (isTooClose(newLeft, newTop));
- 
-             element.style.left = newLeft + "px";
-             element.style.top = newTop + "px";
-         });
+         const handleResize = () =>{
+
+            const userPet = document.querySelectorAll('[id^="pet"]');
+            const container = document.getElementById("house");
+            const containerOffsetTop = container.getBoundingClientRect().top;
+            const containerOffsetLeft = container.getBoundingClientRect().left;
+            const containerWidth = parseFloat(getComputedStyle(container).width);
+            const containerHeight = parseFloat(getComputedStyle(container).height);
+            const minDistance = 100;
+    
+            userPet.forEach(element => {
+                let newLeft, newTop;
+                do {
+                    newLeft = Math.random() * (containerWidth - element.clientWidth - element.clientLeft * 2) + containerOffsetLeft;
+                    newTop = Math.random() * (containerHeight - element.clientHeight - element.clientTop * 2) + containerOffsetTop;
+                } while (isTooClose(newLeft, newTop));
+    
+                element.style.left = newLeft + "px";
+                element.style.top = newTop + "px";
+            });
  
          function isTooClose(newLeft, newTop) {
              for (const element of userPet) {
@@ -113,7 +115,11 @@ const HomeTerrain = () => {
              }
              return false;
          }
-        
+        }
+
+         window.addEventListener("resize", handleResize);
+         return () => window.removeEventListener("resize", handleResize);
+
     }, [pets]);
 
     //User Commands Scripts
@@ -200,7 +206,7 @@ const HomeTerrain = () => {
         <div id="house" className="container">
             
         {pets && pets.map((pet, index) => (
-            <div className="container pets" id={`pet${index + 1}`} key={index}>
+            <div className="container pets" id={`pet${index + 1} `} key={index}>
                 <img src={pet.image} alt={`${pet.name}!`} />
             </div>
         ))}
