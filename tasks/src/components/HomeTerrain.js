@@ -81,7 +81,7 @@ const HomeTerrain = () => {
     useEffect(() => {
 
          // Spawning Script
-         const handleResize = () =>{
+         const spawnPets = () =>{
 
             const userPet = document.querySelectorAll('[id^="pet"]');
             const container = document.getElementById("house");
@@ -101,7 +101,8 @@ const HomeTerrain = () => {
                 element.style.left = newLeft + "px";
                 element.style.top = newTop + "px";
             });
- 
+            
+            //function checker if too close
          function isTooClose(newLeft, newTop) {
              for (const element of userPet) {
                  const existingLeft = parseFloat(element.style.left);
@@ -117,8 +118,9 @@ const HomeTerrain = () => {
          }
         }
 
-         window.addEventListener("resize", handleResize);
-         return () => window.removeEventListener("resize", handleResize);
+         //LISTEN FOR WINDOW RESIZE, TRIGGER SPAWN SCRIPT
+         window.addEventListener("resize", spawnPets);
+         return () => window.removeEventListener("resize", spawnPets);
 
     }, [pets]);
 
