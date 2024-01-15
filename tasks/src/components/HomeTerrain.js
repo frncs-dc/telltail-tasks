@@ -47,7 +47,12 @@ const HomeTerrain = () => {
     //   ];
 
     const [pets, setPets] = useState(null)
-    //Fetch Pets
+    const [buttonPopup, setButtonPopup] = useState(false);
+    //Select InfoPet onclick
+    const [selectedInfoPet, setSelectedInfoPet] = useState(null)
+
+
+    //Fetch Pets from DB
     useEffect(() => {
         const fetchPets = async () => {
             const response = await fetch('/api/pets/PetSystem')
@@ -67,15 +72,11 @@ const HomeTerrain = () => {
 
 
     //Info Modal Popup State Manager
-    const [buttonPopup, setButtonPopup] = useState(false);
-
     const handlePopupExit = () => {
         setButtonPopup(false);
       }
 
-    //Select InfoPet onclick
-    const [selectedInfoPet, setSelectedInfoPet] = useState(null)
-
+    
     //onStart useEffect
     useEffect(() => {
 
@@ -113,7 +114,7 @@ const HomeTerrain = () => {
              return false;
          }
         
-    }, []);
+    }, [pets]);
 
     //User Commands Scripts
     useEffect(() => {
@@ -189,7 +190,7 @@ const HomeTerrain = () => {
                 dragPet(element);
         });
     
-    }, []);
+    }, [pets]);
 
 // need code to pass popup data how???
     return ( 
