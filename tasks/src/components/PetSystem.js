@@ -1,5 +1,4 @@
 import HomeTerrain from '../components/HomeTerrain';
-import UserControls from '../components/UserControls';
 //import '../../public/index.css';
 import {useState} from "react";
 
@@ -17,7 +16,7 @@ function PetSystem() {
       <h1>Normal Terrain</h1>
       <div>Currently doing: {selectedCommand}</div>
       <HomeTerrain command = {selectedCommand} />
-      <UserControls onSelectCommand={handleSelectCommand} />
+      {/* <UserControls onSelectCommand={handleSelectCommand} /> */}
     </div>
   );
 }
