@@ -11,6 +11,7 @@ function Login(){
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [userData, setUserData] = useState(null);
 
     const navigate = useNavigate();
 
@@ -19,8 +20,13 @@ function Login(){
     }
 
     function goToHome() {
-        navigate("/Home");
+        if (userData && userData.username) {
+            navigate(`/Home`);
+        } else {
+            console.error("User data or username is null");
+        }
     }
+    
 
     const fetchUser = async (e) => {
         e.preventDefault()
@@ -29,6 +35,7 @@ function Login(){
         const json = await response.json() // parses the json
 
         if(response.ok){
+            setUserData(json)
             console.log("User Logged In: ", json)
             goToHome()
         }

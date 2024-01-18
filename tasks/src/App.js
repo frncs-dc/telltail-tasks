@@ -24,7 +24,7 @@ function App() {
               element={<Profile />}
             />
             <Route 
-              path="/Home" 
+              path="/Home"
               element={<Home />}
             />
             <Route
