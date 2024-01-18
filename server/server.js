@@ -3,6 +3,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const taskRoutes = require('./routes/tasks')
 const petRoutes = require('./routes/pets')
+const userRoutes = require('./routes/users')
+
 
 const app = express()
 
@@ -17,6 +19,8 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/tasks', taskRoutes)
 app.use('/api/pets', petRoutes)
+app.use('/api/', userRoutes)
+
 
 //CONNECT TO DB
 mongoose.connect(process.env.MONGO_URI)

@@ -1,31 +1,31 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const taskSchema = new Schema({
+const userSchema = new Schema({
     // user:{
     //     type: String,
     //     required: true
     // },
-    title:{
+    username:{
         type: String,
         required: true
     },
-    deadline:{
+    email:{
         type: String,
         required: true
     },
-    type:{
+    password:{
         type: String,
-        enum: ['Work', 'Personal', 'Errands', 'Misc']
+        required: true
     },
-    status:{
+    character:{
         type: String,
-        enum: ['In Progress', 'Done'],
-        default: 'In Progress'
+        required: true
     },
-    notes:{
-        type: String
+    dateCreated:{
+        type: Date,
+        default: Date.now()
     }
 })
 
-module.exports = mongoose.model('Task', taskSchema)
+module.exports = mongoose.model('User', userSchema)

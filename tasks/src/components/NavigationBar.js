@@ -4,9 +4,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavigationBar() {
+
+
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary border">
+      <Navbar expand="lg" className="bg-body-tertiary border border-black background-bg">
         <Container>
           <Navbar.Brand href="/Home">Tell Tail Tasks</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -18,7 +20,7 @@ function NavigationBar() {
               <Nav.Link href="/PetSystem"> Pet System</Nav.Link>
             </Nav>
             <Nav className="ms-auto">
-              <NavDropdown title="Username" id="basic-nav-dropdown" href="/" align="end">
+              <NavDropdown title="Guest" id="basic-nav-dropdown" href="/" align="end">
                   <NavDropdown.Item href="/">Log In</NavDropdown.Item>
                   <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Pet View</NavDropdown.Item>
